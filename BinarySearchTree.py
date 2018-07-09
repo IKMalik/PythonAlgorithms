@@ -57,4 +57,42 @@ class binarysearch():
             else:
                 self.searchkey(root.rightnode, key)
                 
+    def floor(self, root, key): # largest value smaller than key
+
+        if root.key == None:
+            return None
+
+        elif root.key == key:
+            return key
+
+        elif root.key > key:
+            floor(root.lefttnode, key)
+
+        else: # stop when find root that could be floor, now either rightsubtree or root is the floor.
+            
+            floorval = floor(root.rightnode, key)
+            if floorval <= key:
+                return floorval
+            else:
+                return root.key
+
+
+    def ceil(self, root, key): # largest key <= key
+
+        if root.key == None:
+            return None
+
+        elif root.key == key:
+            return root
+
+        elif root.key < key:
+            return self.ceil(root.rightnode, key)
+
+        else: # ceil is this node or in left subtreee
+            
+            ceilnode = self.ceil(root.leftnode, key)
+            if ceilnode >= key:
+                return ceilnode
+            else:
+                return root.key
             
