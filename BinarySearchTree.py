@@ -9,6 +9,7 @@ class node():
         self.key = key
         self.leftnode = None
         self.rightnode = None
+        self.count = 1
 
 
 class binarysearch():
@@ -18,13 +19,16 @@ class binarysearch():
         self.size = 0
         self.rootnode = None
 
-    def insertroot(self, key, data):
+    def insert(self, key, data):
 
-        if self.rootnode == None:
+        if self.rootnode is None:
             self.rootnode = node(key, data)
         else:
             self.insertnode(self.rootnode, key, data)
 
+    def getroot(self):
+
+        return self.rootnode
 
     def insertnode(self, root, key, data):
 
@@ -42,9 +46,32 @@ class binarysearch():
                 else:
                     self.insertnode(root.rightnode, key, data)
 
-    def searchkey(self, root, key):
+            root.count = 1 + self.sizenode(root.leftnode) + self.sizenode(root.rightnode)
 
-        if root == None:
+    def getsize(self):
+        print (self.rootnode.count)
+
+    def sizenode(self, root):
+
+        if root is None:
+            return 0
+        else:
+            return root.count
+
+    def searchkey(self, key):
+
+        if self.rootnode is None:
+            return False
+        else:
+            found = self.searchnode(self.rootnode, key)
+            if found:
+                return True
+            else:
+                return False
+
+    def searchnode(self, root, key):
+        
+        if root is None:
             return False
             
         else:
@@ -52,47 +79,45 @@ class binarysearch():
                 return True
 
             elif key < root.key:
-                self.searchkey(root.leftnode, key)
+                self.searchnode(root.leftnode, key)
 
             else:
-                self.searchkey(root.rightnode, key)
+                self.searchnode(root.rightnode, key)
+        
                 
-    def floor(self, root, key): # largest value smaller than key
+    def floor(self, root, key): 
 
-        if root.key == None:
+        if root is None:
             return None
 
         elif root.key == key:
             return key
 
         elif root.key > key:
-            floor(root.lefttnode, key)
+            return self.floor(root.leftnode, key)
 
-        else: # stop when find root that could be floor, now either rightsubtree or root is the floor.
-            
-            floorval = floor(root.rightnode, key)
-            if floorval <= key:
-                return floorval
+        else:
+            floorkey = self.floor(root.rightnode, key)
+            if (floorkey is None) or (floorkey > key):
+                return root.key 
             else:
-                return root.key
+                return floorkey
 
+    def ceil(self, root, key): 
 
-    def ceil(self, root, key): # largest key <= key
-
-        if root.key == None:
+        if root == None:
             return None
 
         elif root.key == key:
-            return root
+            return key
 
         elif root.key < key:
             return self.ceil(root.rightnode, key)
 
-        else: # ceil is this node or in left subtreee
-            
-            ceilnode = self.ceil(root.leftnode, key)
-            if ceilnode >= key:
-                return ceilnode
-            else:
+        else:             
+            ceilkey = self.ceil(root.leftnode, key)
+            if (ceilkey is None) or (ceilkey < key):
                 return root.key
+            else:
+                return ceilkey
             
