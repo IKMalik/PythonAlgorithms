@@ -1,5 +1,6 @@
-#binary search tree
-
+# 19/7/18 fixed ceil bug
+# 19/7/18 added size method, which returns numbers nodes in a subtree (by default set to number nodes in tree) 
+# 19/7/18 added rank function/ all keys < k 
 
 class node():
 
@@ -120,4 +121,52 @@ class binarysearch():
                 return root.key
             else:
                 return ceilkey
+
+    def ranknode(self, root, key): # number keys < key 
+
+        if root is None:
+            return 0
+        
+        else:
+            
+            if root.key == key:
+                return self.sizenode(root.leftnode)
+
+            elif root.key > key:
+                return self.ranknode(root.leftnode, key) 
+                
+            else:
+                return 1 + self.sizenode(root.leftnode) + self.ranknode(root.rightnode, key)
+                
+    def getrank(self, key):
+
+        if self.rootnode is None:
+            return 0
+        else:
+            print( self.ranknode(self.rootnode, key))
+            
+            
+
+
+if __name__ == '__main__':
+
+    a = binarysearch()
+    a.insert(7,7)
+    a.insert(1,1)
+    a.insert(8,8)
+    a.insert(3,3)
+    a.insert(9,9)
+    a.insert(2,2)
+    a.insert(4,4)
+    a.insert(11,11)
+    a.insert(10,10)
+    a.searchkey(7)
+    root = a.getroot()
+    ceil = a.ceil(root, 10)
+    print(ceil)
+    floor = a.floor(root, 10)
+    print(floor)
+    a.getsize()
+    a.getrank(5)
+
             
