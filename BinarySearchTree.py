@@ -1,6 +1,7 @@
 # 19/7/18 fixed ceil bug
 # 19/7/18 added size method, which returns numbers nodes in a subtree (by default set to number nodes in tree) 
 # 19/7/18 added rank function/ all keys < k 
+# 20/7/18 added inorder traversal to view nodes
 
 #binary search tree
 
