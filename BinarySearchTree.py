@@ -2,6 +2,9 @@
 # 19/7/18 added size method, which returns numbers nodes in a subtree (by default set to number nodes in tree) 
 # 19/7/18 added rank function/ all keys < k 
 
+#binary search tree
+
+
 class node():
 
     def __init__(self, key, data):
@@ -144,6 +147,23 @@ class binarysearch():
             return 0
         else:
             print( self.ranknode(self.rootnode, key))
+
+    def getnodes(self):
+        
+        if self.rootnode is None:
+            print("No nodes exist")
+        else:
+            print("getting nodes")
+            self.inorder(self.rootnode)
+
+
+    def inorder(self, root):
+
+        if root is not None:
+
+            self.inorder(root.leftnode)
+            print(root.key)
+            self.inorder(root.rightnode)
             
             
 
@@ -167,6 +187,9 @@ if __name__ == '__main__':
     floor = a.floor(root, 10)
     print(floor)
     a.getsize()
-    a.getrank(5)
+    a.getrank(8)
+    a.getnodes()
+
+            
 
             
