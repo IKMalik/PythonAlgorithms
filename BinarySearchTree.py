@@ -2,6 +2,8 @@
 # 19/7/18 added size method, which returns numbers nodes in a subtree (by default set to number nodes in tree) 
 # 19/7/18 added rank function/ all keys < k 
 # 20/7/18 added inorder traversal to view nodes
+# 21/7/18 bug in delete min
+
 
 #binary search tree
 
@@ -165,6 +167,22 @@ class binarysearch():
             self.inorder(root.leftnode)
             print(root.key)
             self.inorder(root.rightnode)
+
+    def deletemin(self):
+
+        if self.rootnode is None:
+            print("No nodes exist")
+        else:
+            self.deleteminnode(self.rootnode.leftnode)
+
+    def deleteminnode(self, root):
+
+        if root.leftnode is not None:
+            self.deleteminnode(root.leftnode)
+        else:
+            print (root.key, "deleted")
+            root = root.rightnode
+        
             
             
 
@@ -190,6 +208,10 @@ if __name__ == '__main__':
     a.getsize()
     a.getrank(8)
     a.getnodes()
+    a.deletemin()
+    a.getnodes()
+            
+
 
             
 
