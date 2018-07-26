@@ -2,11 +2,12 @@
 # 19/7/18 added size method, which returns numbers nodes in a subtree (by default set to number nodes in tree) 
 # 19/7/18 added rank function/ all keys < k 
 # 20/7/18 added inorder traversal to view nodes
+# 26/7/18 refactored naming conventions
 
 #binary search tree
 
 
-class node():
+class anode():
 
     def __init__(self, key, data):
 
@@ -27,7 +28,7 @@ class binarysearch():
     def insert(self, key, data):
 
         if self.rootnode is None:
-            self.rootnode = node(key, data)
+            self.rootnode = anode(key, data)
         else:
             self.insertnode(self.rootnode, key, data)
 
@@ -35,33 +36,33 @@ class binarysearch():
 
         return self.rootnode
 
-    def insertnode(self, root, key, data):
+    def insertnode(self, node, key, data):
 
-            if root.key == key:
-                root.data = data
+            if node.key == key:
+                node.data = data
                 
-            elif key < root.key:
-                if root.leftnode is None:                    
-                    root.leftnode = node(key, data)
+            elif key < node.key:
+                if node.leftnode is None:                    
+                    node.leftnode = anode(key, data)
                 else:
-                    self.insertnode(root.leftnode, key, data)
+                    self.insertnode(node.leftnode, key, data)
             else:
-                if root.rightnode is None:
-                    root.rightnode = node(key, data)
+                if node.rightnode is None:
+                    node.rightnode = anode(key, data)
                 else:
-                    self.insertnode(root.rightnode, key, data)
+                    self.insertnode(node.rightnode, key, data)
 
-            root.count = 1 + self.sizenode(root.leftnode) + self.sizenode(root.rightnode)
+            node.count = 1 + self.sizenode(node.leftnode) + self.sizenode(node.rightnode)
 
     def getsize(self):
         print (self.rootnode.count)
 
-    def sizenode(self, root):
+    def sizenode(self, node):
 
-        if root is None:
+        if node is None:
             return 0
         else:
-            return root.count
+            return node.count
 
     def searchkey(self, key):
 
@@ -74,73 +75,73 @@ class binarysearch():
             else:
                 return False
 
-    def searchnode(self, root, key):
+    def searchnode(self, node, key):
         
-        if root is None:
+        if node is None:
             return False
             
         else:
-            if key == root.key:
+            if key == node.key:
                 return True
 
-            elif key < root.key:
-                self.searchnode(root.leftnode, key)
+            elif key < node.key:
+                self.searchnode(node.leftnode, key)
 
             else:
-                self.searchnode(root.rightnode, key)
+                self.searchnode(node.rightnode, key)
         
                 
-    def floor(self, root, key): 
+    def floor(self, node, key): 
 
-        if root is None:
+        if node is None:
             return None
 
-        elif root.key == key:
+        elif node.key == key:
             return key
 
-        elif root.key > key:
-            return self.floor(root.leftnode, key)
+        elif node.key > key:
+            return self.floor(node.leftnode, key)
 
         else:
-            floorkey = self.floor(root.rightnode, key)
+            floorkey = self.floor(node.rightnode, key)
             if (floorkey is None) or (floorkey > key):
-                return root.key 
+                return node.key 
             else:
                 return floorkey
 
-    def ceil(self, root, key): 
+    def ceil(self, node, key): 
 
-        if root == None:
+        if node == None:
             return None
 
-        elif root.key == key:
+        elif node.key == key:
             return key
 
-        elif root.key < key:
-            return self.ceil(root.rightnode, key)
+        elif node.key < key:
+            return self.ceil(node.rightnode, key)
 
         else:             
-            ceilkey = self.ceil(root.leftnode, key)
+            ceilkey = self.ceil(node.leftnode, key)
             if (ceilkey is None) or (ceilkey < key):
-                return root.key
+                return node.key
             else:
                 return ceilkey
 
-    def ranknode(self, root, key): # number keys < key 
+    def ranknode(self, node, key): # number keys < key 
 
-        if root is None:
+        if node is None:
             return 0
         
         else:
             
-            if root.key == key:
-                return self.sizenode(root.leftnode)
+            if node.key == key:
+                return self.sizenode(node.leftnode)
 
             elif root.key > key:
-                return self.ranknode(root.leftnode, key) 
+                return self.ranknode(node.leftnode, key) 
                 
             else:
-                return 1 + self.sizenode(root.leftnode) + self.ranknode(root.rightnode, key)
+                return 1 + self.sizenode(node.leftnode) + self.ranknode(node.rightnode, key)
                 
     def getrank(self, key):
 
@@ -158,16 +159,29 @@ class binarysearch():
             self.inorder(self.rootnode)
 
 
-    def inorder(self, root):
+    def inorder(self, node):
 
-        if root is not None:
+        if node is not None:
 
-            self.inorder(root.leftnode)
-            print(root.key)
-            self.inorder(root.rightnode)
-            
-            
+            self.inorder(node.leftnode)
+            print(node.key)
+            self.inorder(node.rightnode)
 
+    def deletemin(self):
+
+        if self.rootnode is None:
+            print("No nodes exist")
+        else:
+            self.rootnode = self.deleteminnode(self.rootnode)
+
+    def deleteminnode(self, node):
+
+        if node.leftnode is not None:
+            self.deleteminnode(node.leftnode)
+            return node
+        else:
+            return node.rightnode
+        
 
 if __name__ == '__main__':
 
@@ -190,7 +204,6 @@ if __name__ == '__main__':
     a.getsize()
     a.getrank(8)
     a.getnodes()
-
-            
-
+    a.deletemin()
+    a.getnodes()
             
