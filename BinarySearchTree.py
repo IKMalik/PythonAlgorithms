@@ -3,6 +3,7 @@
 # 19/7/18 added rank function/ all keys < k 
 # 20/7/18 added inorder traversal to view nodes
 # 26/7/18 refactored naming conventions
+# 26/7/18 fixed delete min rec bug
 
 #binary search tree
 
@@ -177,17 +178,16 @@ class binarysearch():
     def deleteminnode(self, node):
 
         if node.leftnode is not None:
+            node.leftnode = self.deleteminnode(node.leftnode)
             self.deleteminnode(node.leftnode)
-            return node
-        else:
-            return node.rightnode
-        
+
 
 if __name__ == '__main__':
 
     a = binarysearch()
     a.insert(7,7)
     a.insert(1,1)
+    a.insert(0.5, 0.5)
     a.insert(8,8)
     a.insert(3,3)
     a.insert(9,9)
