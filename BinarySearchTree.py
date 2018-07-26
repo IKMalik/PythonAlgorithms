@@ -8,6 +8,9 @@
 #binary search tree
 
 
+#binary search tree
+
+
 class anode():
 
     def __init__(self, key, data):
@@ -179,8 +182,10 @@ class binarysearch():
 
         if node.leftnode is not None:
             node.leftnode = self.deleteminnode(node.leftnode)
-            self.deleteminnode(node.leftnode)
-
+            return node
+        else:
+            return node.rightnode
+        
 
 if __name__ == '__main__':
 
