@@ -179,10 +179,8 @@ class binarysearch():
 
         if node.leftnode is not None:
             node.leftnode = self.deleteminnode(node.leftnode)
-            return node
-        else:
-            return node.rightnode
-        
+            self.deleteminnode(node.leftnode)
+
 
 if __name__ == '__main__':
 
@@ -209,4 +207,3 @@ if __name__ == '__main__':
     a.deletemin()
     a.getnodes()
             
-
