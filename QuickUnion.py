@@ -5,8 +5,8 @@ class QuickUnion:
 
   def __init__(self,n):
 
-    self.vals = [i for i in range (1,n)]
-    self.size = [1 for j in range (1,n)]
+    self.vals = [i for i in range (0,n)]
+    self.size = [1 for j in range (0,n)]
 
   def GetRoot(self, i):
 
@@ -22,7 +22,7 @@ class QuickUnion:
   def Union(self, i, j):
     
     if (not self.Connected(i,j)):
-      if (self.size(i) < self.size(j)):
+      if (self.size[i] < self.size[j]):
         self.vals[self.GetRoot(i)] = self.vals[self.GetRoot(j)]
         self.size[j] += self.size[i]
       else:
@@ -30,7 +30,12 @@ class QuickUnion:
         self.size[i] += self.size[j]
 
 if __name__ == "__main__":
-  A = QuickUnion(4)
+  A = QuickUnion(6)
   A.GetRoot(2)
-  A.Connected(3,5)
+  A.Union(1,2)
+  A.Union(3,4)
+  A.Union(1,5)
+  A.Union(1,3)
+  print(A.vals)
+  print(A.size)
 
