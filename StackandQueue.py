@@ -37,7 +37,6 @@ class Stack:
 
   def __init__(self):
     
-    self.size = 0
     self.headnode = None
   
   def push(self, data):
@@ -48,7 +47,6 @@ class Stack:
     else:
       anode.nextnode = self.headnode.nextnode
       self.headnode = anode
-    self.size += 1
 
   def pop(self):
 
@@ -57,9 +55,31 @@ class Stack:
     else:
       data = self.headnode.data
       self.headnode = self.headnode.nextnode
-      self.size -= 1
       return data
-  
-  def size(self):
 
-    return self.size
+class Queue:
+
+  def __init__(self):
+    
+    self.headnode = None
+  
+  def enqueue(self, data):
+
+    anode = Node(data)
+    if self.headnode is None:
+      self.headnode = anode
+    else:
+      nextn = self.headnode
+      while (nextn.nextnode is not None):
+        nextn = nextn.nextnode
+      nextn.nextnode = anode 
+
+  def dequeue(self):
+
+    if self.headnode is None:
+      return None
+    else:
+      data = self.headnode.data
+      self.headnode = self.headnode.nextnode
+      return data
+      
