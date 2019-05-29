@@ -67,7 +67,36 @@ if __name__ == '__main__':
     a.deletemin()
     a.addnode(1)
     
-    
+ 
+class BinaryHeap():
+
+  def __init__(self):
+    self.heap = [0]
+    self.size = 0
+  
+  def insert(self, key):
+
+    self.size += 1
+    self.heap.append(key)
+    print (self.heap)
+    self.swim(self.size)
+    print (self.heap)
+  
+  def swim(self, key):
+    while (key > 1 and self.heap[key] > self.heap[key//2]):
+      self.heap[key], self.heap[key//2] = self.heap[key//2], self.heap[key]
+      key = key//2
+  
+  def delmin(self):
+    key = self.heap[1]
+    self.heap[1] = self.heap[self.size]
+    self.heap[self.size] = None
+    print(self.heap)
+    self.skin(1)
+    print(self.heap)
+  
+  def sink(self, key):
+    while(self.heap[key] < self.heap[2*key])
     
 
         
