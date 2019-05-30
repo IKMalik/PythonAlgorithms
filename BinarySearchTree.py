@@ -7,6 +7,7 @@
 # 27/7/18 Added find min function and completed delete key function // hibbard deletion  
 # need to keep in mind scope and return nature in recursive functions
 # 27/7/18 Fixed insidious bug in find min // return bug 
+# 30/5/19 Fixed major bug in insert 
 
 #binary search tree
 
@@ -41,7 +42,7 @@ class binarysearch():
         if self.rootnode is None:
             self.rootnode = anode(key, data)
         else:
-            self._insert(self.rootnode, key, data)
+            self.rootnode = self._insert(self.rootnode, key, data)
 
     def _insert(self, node, key, data):
 
@@ -60,6 +61,7 @@ class binarysearch():
                     self._insert(node.rightnode, key, data)
 
             node.count = 1 + self.sizenode(node.leftnode) + self.sizenode(node.rightnode)
+            return node
 
     def sizenode(self, node):
 
