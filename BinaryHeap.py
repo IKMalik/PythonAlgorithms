@@ -29,7 +29,7 @@ class BinaryHeap():
       bigchild = self.largest(key)
       if self.heap[key] < self.heap[bigchild]:
         self.heap[key], self.heap[bigchild] = self.heap[bigchild], self.heap[key]
-      key *= 2  
+      key = bigchild
   
   def largest(self, key):
     if (2*key)+1 > self.size:
