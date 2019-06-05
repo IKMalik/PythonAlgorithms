@@ -26,12 +26,12 @@ class BinaryHeap():
   
   def sink(self, key):
     while(2*key <= self.size):
-      bigchild = self.smallest(key)
+      bigchild = self.largest(key)
       if self.heap[key] < self.heap[bigchild]:
         self.heap[key], self.heap[bigchild] = self.heap[bigchild], self.heap[key]
       key *= 2  
   
-  def smallest(self, key):
+  def largest(self, key):
     if (2*key)+1 > self.size:
       return 2*key
     if self.heap[2*key] > self.heap[(2*key)+1]:
