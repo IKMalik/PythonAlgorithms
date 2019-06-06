@@ -8,6 +8,7 @@
 # need to keep in mind scope and return nature in recursive functions
 # 27/7/18 Fixed insidious bug in find min // return bug 
 # 30/5/19 Fixed major bug in insert 
+# 6/6/19 Added put method as better alternative to insert
 
 #binary search tree
 
@@ -62,6 +63,26 @@ class binarysearch():
 
             node.count = 1 + self.sizenode(node.leftnode) + self.sizenode(node.rightnode)
             return node
+        
+  def put(self, key, value):
+    
+    self.root = self._put(self.root, key, value)
+
+  def _put(self, node, key, value):
+
+    if node is None:
+      node = Node (key, value)
+
+    elif key == node.key:
+      node.value = value
+
+    elif key > node.key:
+      node.right = self.put(node.right, key, value)
+
+    else:
+      node.left = self_put(node.left, key, value)
+
+    return node
 
     def sizenode(self, node):
 
