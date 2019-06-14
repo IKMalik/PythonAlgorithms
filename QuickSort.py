@@ -26,11 +26,11 @@ def partition(data, lo, hi):
     complete = False
     while not complete:
 
-        while data[leftmark] <= pivotval and leftmark <= rightmark: # why < rightmark instead of < hi
+        while leftmark <= rightmark and data[leftmark] <= pivotval: # why < rightmark instead of < hi
             leftmark += 1
         
 
-        while data[rightmark] >= pivotval and rightmark >= leftmark: # why > leftmark mark instead of > lo
+        while rightmark >= leftmark and data[rightmark] >= pivotval: # why > leftmark mark instead of > lo
             rightmark -= 1
 
         if rightmark < leftmark:
