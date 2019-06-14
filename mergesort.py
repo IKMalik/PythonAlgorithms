@@ -1,41 +1,37 @@
-#merge sort
-
 def mergesort(data):
 
-    if (len(data)> 1):
-        midpoint = len(data)//2
-        fsthalf = data[:midpoint]
-        sndhalf = data[midpoint:]
+  if len(data) > 1:
 
-        mergesort(fsthalf)
-        mergesort(sndhalf)
+    mid = len(data)//2
+    left = data[mid:]
+    right = data[:mid]
 
-        lo = 0
-        hi = 0
-        pos = 0
+    mergesort(left)
+    mergesort(right)
 
-        while (lo < len(fsthalf) and hi < len(sndhalf)): # fist half to finish, then add all the remnants in other 2 loops
+    i = j = k = 0
 
-            if(fsthalf[lo] < sndhalf[hi]):
-                data[pos] = fsthalf[lo]
-                lo += 1
-                pos += 1
-                
-            else:
-                data[pos] = sndhalf[hi]
-                hi += 1
-                pos += 1
+    while i < len(left) and j < len(right):
+      if left[i] < right[j]:
+        data[k] = left[i]
+        i += 1
+      else:
+        data[k] = right[j]
+        j+=1 
+      k+=1 
+    
+    while i < len(left):
+        data[k] = left[i]
+        i += 1
+        k += 1
+    
+    while j < len(right):
+        data[k] = right[j]
+        j += 1
+        k += 1
 
-        while lo < len(fsthalf):
-            data[pos]=fsthalf[lo]
-            lo += 1
-            pos += 1
 
-        while hi < len(sndhalf):
-            data[pos]=sndhalf[hi]
-            hi += 1
-            pos += 1
-            
-    print(str(data))
-        
-mergesort([4,8, 2, 7, 12,41,1,0,23,1,-1])
+if __name__ == '__main__': 
+    arr = [12, 11, 13, 5, 6, 7]  
+    mergesort(arr) 
+    print(arr)
