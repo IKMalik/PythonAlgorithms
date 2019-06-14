@@ -10,7 +10,7 @@ def quicksort(data):
 
 def quicksorthelper(data, lo, hi):
     
-    if lo < hi:
+    if lo < hi: # if not single element 
         splitpoint = partition(data, lo, hi)
         quicksorthelper(data, lo, splitpoint-1)
         quicksorthelper(data, splitpoint+1, hi)
