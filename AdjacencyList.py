@@ -1,35 +1,29 @@
-class node:
+# Working adjacency list
+
+class vertex:
 
   def __init__(self, key):
 
-    self.key = key
     self.neighbours = {}
+    self.key = key
   
-  def addedge(self, key, edge):
-
+  def add(self, key, edge):
     self.neighbours[key] = edge
 
-  
-class adjlist:
+class graph:
 
   def __init__(self):
 
-    self.nodes = {}
-    self.nbnodes 0
-  
-  def addnode(self, key):
+    self.root = {}
+    self.nbnodes = 0
 
-    if key not in self.nodes:
-      self.nodes[key] = node()
-    self.nbnodes += 1
-  
-  def addedge(self, key1, key2, edge):
+  def addnode(self, key1, key2, edge=0):
+    if key1 not in self.root:
+      self.root[key1] = vertex(key1)
+      self.nbnodes += 1
+    if key2 not in self.root:
+      self.root[key2] = vertex(key2)
+      self.nbnodes += 1
 
-    if key1 not in self.nodes:
-      self.addnode(key1)
-    elif key2 not in self.nodes:
-      self.addnode(key2)
-    else:
-      self.nodes[key1].addedge(key2, edge)
-      self.nodes[key2].addedge(key1, edge)
-    
+    self.root[key1].add(key2, edge)
+    self.root[key2].add(key1, edge)
