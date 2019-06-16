@@ -1,0 +1,25 @@
+class test:
+
+  def __init__(self):
+
+    self.root = []
+  
+  def a(self, arr):
+    a = [1,2]
+    return a
+  
+  def b(self):
+    self.root.append(3)
+  
+  def c(self, arr):
+    arr = [1,2]
+
+if __name__ == '__main__':
+
+  tester = test()
+  tester.root = tester.a(tester.root)
+  tester.b()
+  tester.c()
+  print(tester.root)
+
+## TESTER C DOES NOTHING SINCE ASSSIGMENT CHANGES REFFERENCE TO MEMORY
