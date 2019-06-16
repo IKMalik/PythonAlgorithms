@@ -1,0 +1,83 @@
+# pre post and inorder traversal
+# IN - LEFT, PARENT, RIGHT
+# PRE - PARENT, LEFT, RIGHT
+# POST - LEFT, RIGHT, PARENT
+
+class node:
+
+  def __init__(self, key):
+    
+    self.key = key
+    self.left = None
+    self.right = None
+
+class BST:
+
+  def __init__(self):
+
+    self.root = None
+  
+  def add(self, key):
+
+    self.root = self._add(key, self.root)
+  
+  def _add(self, key, current):
+
+    if current is None:
+      current = node(key)
+    elif key == current.key:
+      return
+    elif key < current.key:
+      current.left = self._add(key, current.left)
+    else:
+      current.right = self._add(key, current.right)
+    
+    return current
+  
+  def inorder(self):
+    print('nodes inorder traversal: ')
+    self._inorder(self.root)
+
+  def _inorder(self, node):
+
+    if node:
+      self._inorder(node.left)
+      print(node.key)
+      self._inorder(node.right)
+  
+  def preorder(self):
+    print('nodes in preorder traversal: ')
+    self._preorder(self.root)
+
+  def _preorder(self, node):
+
+    if node:
+      print(node.key)
+      self._preorder(node.left)
+      self._preorder(node.right)
+  
+  def postorder(self):
+    print('nodes in postorder traversal: ')
+    self._postorder(self.root)
+  
+  def _postorder(self, node):
+
+    if node:
+      self._postorder(node.left)
+      self._postorder(node.right)
+      print(node.key)
+      
+
+if __name__ == '__main__':
+
+  a = BST()
+  a.add(4)
+  a.add(1)
+  a.add(6)
+  a.add(2)
+  a.add(0)
+  a.inorder()
+  a.preorder()
+  a.postorder()
+
+
