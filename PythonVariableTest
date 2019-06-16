@@ -19,7 +19,7 @@ if __name__ == '__main__':
   tester = test()
   tester.root = tester.a(tester.root)
   tester.b()
-  tester.c()
+  tester.c(tester.root)
   print(tester.root)
 
 ## TESTER C DOES NOTHING SINCE ASSSIGMENT CHANGES REFFERENCE TO MEMORY
