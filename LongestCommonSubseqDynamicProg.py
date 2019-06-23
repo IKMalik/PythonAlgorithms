@@ -8,8 +8,6 @@ def lcs(word1, word2):
 
 def _lcs(word1, word2, x, y):
 
-  # create matrix 
-
   matrix = [[-1]*(x) for val in range (0,y)]
 
   for i in range(0, y):
