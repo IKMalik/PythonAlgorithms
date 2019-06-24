@@ -8,27 +8,22 @@ def lcs(word1, word2):
 
 def _lcs(word1, word2, x, y):
 
-  matrix = [[-1]*(x) for val in range (0,y)]
+  matrix = [ [None] * (x) for _ in range (y) ]
 
-  for i in range(0, y):
-    for j in range(0, x):
+  for i in range(y):
+    for j in range(x):
       
       if word1[j] == word2[i]:
-        if i-1 < 0 or j-1 < 0:
-          matrix[i][j] = 1 
-        else:
-          matrix[i][j] = 1 + matrix[i-1][j-1]
+        matrix[i][j] = 1
+        if i > 0 and j > 0:
+          matrix[i][j] += matrix[i-1][j-1]
 
       else:
-        val1 = 0
-        val2 = 0
-        if i-1 >= 0:
-          val1 = matrix[i-1][j]
-        if j-1 >= 0:
-          val2 = matrix[i][j-1]
+        val1 = matrix[i-1][j] if i > 0 else 0
+        val2 = matrix[i][j-1] if j > 0 else 0
         matrix[i][j] = max(val1,val2)
   
-  return matrix[y-1][x-1]
+  return matrix[-1][-1]
 
 a = 'ABC'
 b = 'ABCD'
