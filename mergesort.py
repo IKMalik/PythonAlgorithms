@@ -3,8 +3,8 @@ def mergesort(data):
   if len(data) > 1:
 
     mid = len(data)//2
-    left = data[mid:]
-    right = data[:mid]
+    left = data[:mid]
+    right = data[mid:]
 
     mergesort(left)
     mergesort(right)
