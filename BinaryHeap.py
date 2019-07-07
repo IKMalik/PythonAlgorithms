@@ -19,8 +19,8 @@ class BinaryHeap():
       key = key//2
   
   def delmax(self):
-    self.heap[1] = self.heap[self.size]
     self.heap.pop()
+    self.heap[1] = self.heap[self.size]
     self.size -= 1
     self.sink(1)
   
