@@ -20,7 +20,8 @@ def merge(left, right):
       else:
         aux.append(right[j])
         j += 1
-    
+       
+    # DO THE FOR LOOPS NOT THIS TO IMPROVE MEMORY COST
     if i < len(left):
         aux += left[i:]
 
