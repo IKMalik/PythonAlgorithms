@@ -1,4 +1,4 @@
-# Find a cycle in undirected graph using bfs
+# Find a cycle in undirected graph using dfs
 # O(V+E)
 
 class vertex:
