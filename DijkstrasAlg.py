@@ -6,26 +6,25 @@ def dijkstra(graph, start):
 
   distances = {vertex:float('inf') for vertex in graph}
   pq = []
-  pq_update = {}
-  distances[start] = 0
+  pq = [[0, start]]
 
-  for vertex, value in distances.items():
-    entry = [vertex, value]
-    heapq.heappush(pq, entry)
-    pq_update[vertex] = entry
+  while pq:
 
-  while len(pq) > 0:
+    currdist, currvert = heapq.heappop(pq)
 
-    getmin = heapq.heappop(pq)[0]
+    if currdist > distances[currvert]:
+      continue
 
-    for neighbour, distance_neigh in graph[getmin].items():
-      dist = distances[getmin] + distance_neigh
+    for neighbour, distance_neigh in graph[currvert].items():
+      dist = currdist + distance_neigh
+
       if dist < distances[neighbour]:
         distances[neighbour] = dist
-        pq_update[neighbour][1] = dist
+        heapq.heappush(pq, [dist, neighbour])
 
   print(distances)
   return distances 
+
 
 
 if __name__ == '__main__':
