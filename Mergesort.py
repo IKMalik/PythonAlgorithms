@@ -32,3 +32,47 @@ def merge(left, right):
 
 arr = [12, 11, 13, 5, 6, 7]  
 print(mergesort(arr))
+
+
+UPDATE:
+    
+    
+a = [5, 2, 3, 1, 4]
+
+def mergesort(nums):
+
+  if len(nums) <= 1:
+    return nums
+
+  mid = len(nums)//2
+  
+  left = mergesort(nums[: mid])
+  right = mergesort(nums[mid:])
+
+  return partition(left, right)
+
+def partition(left, right):
+
+  result = []
+  l = 0
+  r = 0
+
+  while l < len(left) and r < len(right):
+    if left[l] <= right[r]:
+      result.append(left[l])
+      l += 1
+    else:
+      result.append(right[r])
+      r += 1
+  
+  if l < len(left):
+    for item in range(l, len(left)):
+      result.append(left[item])
+  
+  if r < len(right):   
+    for item in range(r, len(right)):
+      result.append(right[item])
+  
+  return result 
+
+print(mergesort(a))
