@@ -1,34 +1,40 @@
 # Prefix Tree / Trie code
 
-class node:
+class TrieNode:
 
   def __init__(self):
 
     self.children = {}
-    self.isword = False
-  
-class trie:
+    self.isWord = False
+
+class Trie:
 
   def __init__(self):
 
-    self.root = None
+    self.root = TrieNode()
   
-  def insert(self, key):
+  def add(self, word):
 
-    current = self.root
-    for char in key:
-      if char not in current.children:
-        current.children[char] = node()
-      current = current.children[char]
-    current.isword = True
-  
-  def get(self, key):
+    curr = self.root 
+    for char in word:
+      if char not in curr.children:
+        curr.children[char] = TrieNode()
+      curr = curr.children[char]
+    curr.isWord = True
 
-    current = self.root
-    for char in key:
-      if char not in current.children:
+  def get(self, word):
+
+    curr = self.root
+    for char in word:
+      if char not in curr.children:
         return False
-      current = current.children[char]
-    return current.isword 
-  
+      curr = curr.children[char]
+    print(curr.isWord)
+    return curr.isWord
 
+trie = Trie()
+trie.add('bob')
+trie.add('bed')
+trie.get('bob')
+trie.get('bed')
+trie.get('be')
