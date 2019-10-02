@@ -17,9 +17,11 @@ class SegmentTree:
   
   def buildTree(self, nums, lo, hi):
 
+    # if given empty list
     if lo > hi:
       return None
     
+    #non empty list base case
     if lo == hi:
       curr = SegmentNode(lo, hi)
       curr.value = nums[lo]
@@ -34,4 +36,15 @@ class SegmentTree:
     curr.value = curr.left.value + curr.right.value
 
     return curr
+  
+  def sumRange(self, lo, hi):
+
+    return _sumRange(self.root, lo, hi)
+  
+  def _sumRange(node, lo, hi):
+
+    # base case
+    if node.start == lo and node.end == hi:
+      return node
     
+    # 3 cases
