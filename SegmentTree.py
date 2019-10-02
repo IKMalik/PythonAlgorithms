@@ -30,8 +30,8 @@ class SegmentTree:
     mid = (lo + hi)//2
 
     curr = SegmentNode(lo, hi)
-    curr.left = buildTree(lo, mid)
-    curr.right = buildTree(mid+1, hi)
+    curr.left = self.buildTree(nums, lo, mid)
+    curr.right = self.buildTree(nums, mid+1, hi)
 
     curr.value = curr.left.value + curr.right.value
 
@@ -39,12 +39,27 @@ class SegmentTree:
   
   def sumRange(self, lo, hi):
 
-    return _sumRange(self.root, lo, hi)
+    return self._sumRange(self.root, lo, hi)
   
-  def _sumRange(node, lo, hi):
+  def _sumRange(self, node, lo, hi):
 
     # base case
     if node.start == lo and node.end == hi:
-      return node
-    
+      return node.value
+
+    mid = (hi + lo)//2 #WRONG vs node.start and node.end
+
+
     # 3 cases
+    if hi <= mid:
+      return self._sumRange(node.left, lo, hi)
+    
+    elif lo > mid:
+      return self._sumRange(node.right, lo, hi)
+    
+    else:
+      return self._sumRange(node.left, lo, mid) + self._sumRange(node.right, mid+1, hi)
+
+
+a = SegmentTree([2,6,8,1,2,3,4])
+print(a.sumRange(0, 6))
