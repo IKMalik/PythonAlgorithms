@@ -47,8 +47,7 @@ class SegmentTree:
     if node.start == lo and node.end == hi:
       return node.value
 
-    mid = (hi + lo)//2 #WRONG vs node.start and node.end
-
+    mid = (node.start+node.end)//2 # why this instead of hi and lo 
 
     # 3 cases
     if hi <= mid:
@@ -62,4 +61,4 @@ class SegmentTree:
 
 
 a = SegmentTree([2,6,8,1,2,3,4])
-print(a.sumRange(0, 6))
+print(a.sumRange(0, 3))
