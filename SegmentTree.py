@@ -59,6 +59,27 @@ class SegmentTree:
     else:
       return self._sumRange(node.left, lo, mid) + self._sumRange(node.right, mid+1, hi)
 
+  def update(self, i, val):
+
+    return self._update(self.root, i, val)
+
+  def _update(self, root, i, val):
+      
+      #Base case
+      if root.start == root.end:
+          root.value = val
+          return 
+  
+      mid = (root.start + root.end) // 2
+      
+      if i <= mid:
+          self._update(root.left, i, val)
+      else:
+          self._update(root.right, i, val)
+      
+      root.value = root.left.value + root.right.value
 
 a = SegmentTree([2,6,8,1,2,3,4])
+print(a.sumRange(0, 3))
+a.update(1, 7)
 print(a.sumRange(0, 3))
