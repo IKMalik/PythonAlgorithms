@@ -20,9 +20,9 @@ class BinarySearch:
     if key === self.data[mid]:
       return True
     elif key < self.data[mid]:
-      return self._search(0, mid-1, key)
+      return self._search(lo, mid-1, key)
     else:
-      return self._search(mid+1, len(sel.data)-1, key)
+      return self._search(mid+1, hi, key)
 
 # ITERATIVE IMPLEMENTATION
 
