@@ -36,7 +36,7 @@ class BinarySearch:
 
     lo = 0
     hi = len(self.data)-1
-    while hi > lo:
+    while hi >= lo:
 
       mid = (hi+lo)//2
 
