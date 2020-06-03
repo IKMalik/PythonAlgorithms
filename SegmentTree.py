@@ -79,3 +79,48 @@ class NumArray:
             return self.rangeSum(node.left, lo, mid) + self.rangeSum(node.right, mid+1, hi)
         
         
+# updated segment tree 
+
+class Node():
+    
+    def __init__(self, val, index_range, left=None, right=None):
+        
+        self.val = val
+        self.index_range = index_range
+        self.left = left
+        self.right = right
+
+class SegmentTree():
+    
+    def __init__(self, nums):
+        
+        if not nums: return None
+        self.root = self.build_tree(nums, 0, len(nums)-1)
+        
+    def build_tree(self, nums, lo, hi):
+        
+        if lo == hi: return Node(nums[lo], (lo,hi))
+        
+        mid = lo + (hi-lo)//2
+        
+        curr_node = Node(None, (lo,hi), self.build_tree(nums, lo, mid), self.build_tree(nums, mid+1, hi))
+        curr_node.val = curr_node.left.val + curr_node.right.val
+        return curr_node
+
+    def sum_range(self, node, lo, hi):
+        
+        if node.index_range[0] >= lo and node.index_range[1] <= hi: return node.val
+        elif hi < node.index_range[0] or lo > node.index_range[1]: return 0
+        return self.sum_range(node.left, lo, hi) + self.sum_range(node.right, lo, hi)
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        
+        self.segment_tree = SegmentTree(nums)
+
+    def sumRange(self, i: int, j: int) -> int:
+        
+        if not self.segment_tree: return 0
+        return self.segment_tree.sum_range(self.segment_tree.root, i, j)
+        
